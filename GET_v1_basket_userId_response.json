@@ -1,0 +1,18 @@
+{
+    "status": {
+      "code": 1000,
+      "header": null,
+      "description": "Success"
+    },
+  "data": {
+    "basketId": 1,
+    "products": [
+      {
+        "productId": 1,
+        "productName": "Nike 1",
+        "numberOfProduct": 3,
+        "productPrice": 999.00
+      }
+    ]
+  }
+}
