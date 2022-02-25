@@ -1,0 +1,16 @@
+{
+    "userId": 1,
+    "checkoutId": 1,
+    "paymentInfo": {
+        "cardNumber": "1111111111111111",
+        "cardName": "Tep Wacharotayangoon",
+        "cardExpiration": "03/26",
+        "cardCVV": "555"
+    },
+    "shippingInfo": {
+        "email": "mygmail@gmail.com",
+        "recieverName": "Tep Wacharotayangoon",
+        "phoneNumber": "0999999999",
+        "address": "55/555 Rama IV road ... "
+    }
+}
