@@ -1,10 +1,3 @@
 {
-  "status": {
-    "code": 1000,
-    "header": null,
-    "description": "Success"
-  },
-  "data": {
-    "checkoutId": 1
-  }
+  "checkoutId": 1
 }
