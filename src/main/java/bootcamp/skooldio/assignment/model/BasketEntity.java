@@ -12,6 +12,8 @@ import javax.persistence.*;
 public class BasketEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer recordId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer basketId;
     private Boolean basketActive;
     private Integer userId;

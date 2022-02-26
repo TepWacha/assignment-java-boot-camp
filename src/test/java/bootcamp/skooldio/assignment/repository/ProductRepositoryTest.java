@@ -19,4 +19,11 @@ class ProductRepositoryTest {
         List<ProductEntity> response = productRepository.findByProductNameContaining("Nike");
         Assertions.assertEquals(10, response.size());
     }
+
+    @Test
+    void findByProductId() {
+        List<ProductEntity> response = productRepository.findByProductId(1);
+        Assertions.assertEquals(1, response.size());
+        Assertions.assertEquals("Nike 1", response.get(0).getProductName());
+    }
 }
