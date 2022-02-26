@@ -1,21 +1,27 @@
 package bootcamp.skooldio.assignment.service;
 
+import bootcamp.skooldio.assignment.model.BasketEntity;
+import bootcamp.skooldio.assignment.model.PostProductAddToBasketRequest;
 import bootcamp.skooldio.assignment.model.ProductEntity;
 import bootcamp.skooldio.assignment.model.ProductResponse;
+import bootcamp.skooldio.assignment.repository.BasketRepository;
 import bootcamp.skooldio.assignment.repository.ProductRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.*;
 import static reactor.core.publisher.Mono.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -24,6 +30,10 @@ class ProductServiceTest {
     private ProductService productService;
     @Mock
     private ProductRepository productRepository;
+    @Mock
+    private BasketRepository basketRepository;
+    @Captor
+    private ArgumentCaptor<BasketEntity> basketEntityCaptor;
     
     @Test
     void getProductByKeyword() {
@@ -101,5 +111,40 @@ class ProductServiceTest {
         doReturn(productEntityList).when(productRepository).findByProductNameContaining("Nike");
         ProductResponse response = productService.getProductByKeyword("Nike");
         Assertions.assertEquals(10, response.getProducts().size());
+    }
+
+    @Test
+    void postProductAddToBasket_noActiveBasket() {
+        doReturn(Collections.EMPTY_LIST).when(basketRepository)
+                .findByUserIdAndBasketActive(1, true);
+        doReturn(new BasketEntity()).when(basketRepository).save(any(BasketEntity.class));
+        productService.addToBasket(new PostProductAddToBasketRequest()
+                .setNumberOfProduct(3)
+                .setProductId(1)
+                .setUserId(1));
+        verify(basketRepository).save(basketEntityCaptor.capture());
+        Assertions.assertEquals(3, basketEntityCaptor.getValue().getNumberOfProduct());
+        Assertions.assertEquals(1, basketEntityCaptor.getValue().getProductId());
+        Assertions.assertEquals(1, basketEntityCaptor.getValue().getUserId());
+        Assertions.assertEquals(true, basketEntityCaptor.getValue().getBasketActive());
+        Assertions.assertEquals(true, basketEntityCaptor.getValue().getRecordActive());
+    }
+
+    @Test
+    void postProductAddToBasket_withActiveBasket() {
+        doReturn(Collections.singletonList(new BasketEntity().setBasketId(1))).when(basketRepository)
+                .findByUserIdAndBasketActive(1, true);
+        doReturn(new BasketEntity()).when(basketRepository).save(any(BasketEntity.class));
+        productService.addToBasket(new PostProductAddToBasketRequest()
+                .setNumberOfProduct(3)
+                .setProductId(1)
+                .setUserId(1));
+        verify(basketRepository).save(basketEntityCaptor.capture());
+        Assertions.assertEquals(1, basketEntityCaptor.getValue().getBasketId());
+        Assertions.assertEquals(3, basketEntityCaptor.getValue().getNumberOfProduct());
+        Assertions.assertEquals(1, basketEntityCaptor.getValue().getProductId());
+        Assertions.assertEquals(1, basketEntityCaptor.getValue().getUserId());
+        Assertions.assertEquals(true, basketEntityCaptor.getValue().getBasketActive());
+        Assertions.assertEquals(true, basketEntityCaptor.getValue().getRecordActive());
     }
 }
