@@ -1,11 +1,10 @@
 package bootcamp.skooldio.assignment.controller;
 
-import bootcamp.skooldio.assignment.model.BasketResponse;
+import bootcamp.skooldio.assignment.model.*;
 import bootcamp.skooldio.assignment.service.BasketService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class BasketController {
@@ -16,5 +15,10 @@ public class BasketController {
     @GetMapping("v1/basket/{userId}")
     public BasketResponse getBasketByUserId(@PathVariable Integer userId) {
         return basketService.getBasketByUserId(userId);
+    }
+
+    @PostMapping("v1/basket/checkout")
+    public PostBasketCheckoutResponse postBasketCheckout(@RequestBody PostBasketCheckoutRequest request) throws JsonProcessingException {
+        return basketService.postBasketCheckout(request);
     }
 }
