@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -35,6 +36,7 @@ public class ProductService {
         List<BasketEntity> basketEntities = basketRepository.findByUserIdAndBasketActive(request.getUserId(), true);
         if (basketEntities.isEmpty()) {
             basketRepository.save(new BasketEntity()
+                    .setBasketId(UUID.randomUUID().toString())
                     .setBasketActive(true)
                     .setRecordActive(true)
                     .setNumberOfProduct(request.getNumberOfProduct())

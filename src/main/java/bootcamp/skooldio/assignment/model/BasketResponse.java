@@ -13,6 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BasketResponse implements Serializable {
-    private Integer basketId;
+    private String basketId;
     private List<ProductInBasket> products;
 }

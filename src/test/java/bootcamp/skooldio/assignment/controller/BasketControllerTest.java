@@ -33,7 +33,7 @@ class BasketControllerTest {
                 new BasketEntity()
                         .setRecordId(1)
                         .setNumberOfProduct(2)
-                        .setBasketId(1)
+                        .setBasketId("1")
                         .setBasketActive(true)
                         .setRecordActive(true)
                         .setProductId(1)
@@ -41,14 +41,14 @@ class BasketControllerTest {
                 new BasketEntity()
                         .setRecordId(2)
                         .setNumberOfProduct(1)
-                        .setBasketId(1)
+                        .setBasketId("1")
                         .setBasketActive(true)
                         .setRecordActive(true)
                         .setProductId(1)
                         .setUserId(1)))
                 .when(basketRepository).findByUserIdAndBasketActiveAndRecordActive(1,true, true);
         BasketResponse response = testRestTemplate.getForObject("/v1/basket/1", BasketResponse.class);
-        Assertions.assertEquals(1, response.getBasketId());
+        Assertions.assertEquals("1", response.getBasketId());
         Assertions.assertEquals(1, response.getProducts().size());
         Assertions.assertEquals(1, response.getProducts().get(0).getProductId());
         Assertions.assertEquals("Nike 1", response.getProducts().get(0).getProductName());
@@ -62,7 +62,7 @@ class BasketControllerTest {
                 new BasketEntity()
                         .setRecordId(1)
                         .setNumberOfProduct(2)
-                        .setBasketId(1)
+                        .setBasketId("1")
                         .setBasketActive(true)
                         .setRecordActive(true)
                         .setProductId(1)
@@ -70,7 +70,7 @@ class BasketControllerTest {
                 new BasketEntity()
                         .setRecordId(2)
                         .setNumberOfProduct(1)
-                        .setBasketId(1)
+                        .setBasketId("1")
                         .setBasketActive(true)
                         .setRecordActive(true)
                         .setProductId(1)
@@ -79,7 +79,7 @@ class BasketControllerTest {
         PostBasketCheckoutResponse response = testRestTemplate.postForObject(
                 "/v1/basket/checkout",
                 new PostBasketCheckoutRequest()
-                        .setBasketId(1)
+                        .setBasketId("1")
                         .setUserId(1),
                 PostBasketCheckoutResponse.class);
         Assertions.assertEquals(1, response.getCheckoutId());

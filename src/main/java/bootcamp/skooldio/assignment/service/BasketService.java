@@ -69,7 +69,7 @@ public class BasketService {
         return new PostBasketCheckoutResponse().setCheckoutId(checkoutEntity.getCheckoutId());
     }
 
-    void updateBasketActiveByBasketId(Integer basketId, Boolean basketActive) {
+    void updateBasketActiveByBasketId(String basketId, Boolean basketActive) {
         List<BasketEntity> basketList = basketRepository.findByBasketId(basketId);
         for (BasketEntity basketEntity : basketList) {
             basketRepository.save(basketEntity.setBasketActive(basketActive));

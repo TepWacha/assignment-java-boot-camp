@@ -41,7 +41,7 @@ public class BasketServiceTest {
                 new BasketEntity()
                         .setRecordId(1)
                         .setNumberOfProduct(2)
-                        .setBasketId(1)
+                        .setBasketId("1")
                         .setBasketActive(true)
                         .setRecordActive(true)
                         .setProductId(1)
@@ -49,14 +49,14 @@ public class BasketServiceTest {
                 new BasketEntity()
                         .setRecordId(2)
                         .setNumberOfProduct(1)
-                        .setBasketId(1)
+                        .setBasketId("1")
                         .setBasketActive(true)
                         .setRecordActive(true)
                         .setProductId(1)
                         .setUserId(1)))
                 .when(basketRepository).findByUserIdAndBasketActiveAndRecordActive(1,true, true);
         BasketResponse response = basketService.getBasketByUserId(1);
-        Assertions.assertEquals(1, response.getBasketId());
+        Assertions.assertEquals("1", response.getBasketId());
         Assertions.assertEquals(1, response.getProducts().size());
         Assertions.assertEquals(1, response.getProducts().get(0).getProductId());
         Assertions.assertEquals("Nike 1", response.getProducts().get(0).getProductName());
@@ -72,7 +72,7 @@ public class BasketServiceTest {
                 new BasketEntity()
                         .setRecordId(1)
                         .setNumberOfProduct(2)
-                        .setBasketId(1)
+                        .setBasketId("1")
                         .setBasketActive(true)
                         .setRecordActive(true)
                         .setProductId(1)
@@ -80,7 +80,7 @@ public class BasketServiceTest {
                 new BasketEntity()
                         .setRecordId(2)
                         .setNumberOfProduct(1)
-                        .setBasketId(1)
+                        .setBasketId("1")
                         .setBasketActive(true)
                         .setRecordActive(true)
                         .setProductId(1)
@@ -90,7 +90,7 @@ public class BasketServiceTest {
                 new BasketEntity()
                         .setRecordId(1)
                         .setNumberOfProduct(2)
-                        .setBasketId(1)
+                        .setBasketId("1")
                         .setBasketActive(true)
                         .setRecordActive(true)
                         .setProductId(1)
@@ -98,14 +98,14 @@ public class BasketServiceTest {
                 new BasketEntity()
                         .setRecordId(2)
                         .setNumberOfProduct(1)
-                        .setBasketId(1)
+                        .setBasketId("1")
                         .setBasketActive(true)
                         .setRecordActive(true)
                         .setProductId(1)
                         .setUserId(1)))
-                .when(basketRepository).findByBasketId(1);
+                .when(basketRepository).findByBasketId("1");
         doReturn(new CheckoutEntity().setCheckoutId(1)).when(checkoutRepository).save(any(CheckoutEntity.class));
-        PostBasketCheckoutResponse response = basketService.postBasketCheckout(new PostBasketCheckoutRequest().setUserId(1).setBasketId(1));
+        PostBasketCheckoutResponse response = basketService.postBasketCheckout(new PostBasketCheckoutRequest().setUserId(1).setBasketId("1"));
         Assertions.assertEquals(1, response.getCheckoutId());
     }
 

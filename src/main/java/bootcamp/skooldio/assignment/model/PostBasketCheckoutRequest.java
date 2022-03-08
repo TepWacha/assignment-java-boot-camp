@@ -12,6 +12,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostBasketCheckoutRequest implements Serializable {
-    private Integer basketId;
+    private String basketId;
     private Integer userId;
 }

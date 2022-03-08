@@ -11,5 +11,5 @@ import java.util.List;
 public interface BasketRepository extends JpaRepository<BasketEntity, Integer> {
     List<BasketEntity> findByUserIdAndBasketActive(Integer userId, Boolean basketActive);
     List<BasketEntity> findByUserIdAndBasketActiveAndRecordActive(Integer userId, Boolean basketActive, Boolean recordActive);
-    List<BasketEntity> findByBasketId(Integer basketId);
+    List<BasketEntity> findByBasketId(String basketId);
 }

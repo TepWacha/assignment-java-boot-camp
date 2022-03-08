@@ -132,7 +132,7 @@ class ProductServiceTest {
 
     @Test
     void postProductAddToBasket_withActiveBasket() {
-        doReturn(Collections.singletonList(new BasketEntity().setBasketId(1))).when(basketRepository)
+        doReturn(Collections.singletonList(new BasketEntity().setBasketId("1"))).when(basketRepository)
                 .findByUserIdAndBasketActive(1, true);
         doReturn(new BasketEntity()).when(basketRepository).save(any(BasketEntity.class));
         productService.addToBasket(new PostProductAddToBasketRequest()
@@ -140,7 +140,7 @@ class ProductServiceTest {
                 .setProductId(1)
                 .setUserId(1));
         verify(basketRepository).save(basketEntityCaptor.capture());
-        Assertions.assertEquals(1, basketEntityCaptor.getValue().getBasketId());
+        Assertions.assertEquals("1", basketEntityCaptor.getValue().getBasketId());
         Assertions.assertEquals(3, basketEntityCaptor.getValue().getNumberOfProduct());
         Assertions.assertEquals(1, basketEntityCaptor.getValue().getProductId());
         Assertions.assertEquals(1, basketEntityCaptor.getValue().getUserId());
