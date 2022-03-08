@@ -1,0 +1,9 @@
+{
+  "invoiceNumber": 1,
+  "payer": "Tep Wacharotayangoon",
+  "transactionDatetime" : "25-02-2018T23:33:00+07:00",
+  "expiredDatetime": "27-02-2018T23:33:00+07:00",
+  "payee": "Lazada",
+  "barcodeNumber": "111111111111111",
+  "orderPrice": 399.00
+}

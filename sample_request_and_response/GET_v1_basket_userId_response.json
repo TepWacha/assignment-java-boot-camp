@@ -1,0 +1,11 @@
+{
+  "basketId": "1278c452-3ec7-462c-8f01-979765fb127e",
+  "products": [
+    {
+      "productId": 1,
+      "productName": "Nike 1",
+      "numberOfProduct": 3,
+      "productPrice": 999.00
+    }
+  ]
+}
